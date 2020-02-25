@@ -1,5 +1,5 @@
 {
-  "Engineers": [
+  "engineers": [
     {
       "name": "Linus Torvalds",
       "accomplishment": "Linux kernel"
