@@ -9,10 +9,9 @@ const useEngineers = (): Engineer[] => {
     const [engineers, setEngineers] = useState<Engineer[]>([]);
 
     useEffect(() => {
-        api
+       const subscription =  api
             .get<Engineer[]>("engineers")
             .pipe(
-                take(1),
                 catchError(err => of(console.log(err)))
             )
             .subscribe(response => {
@@ -20,6 +19,10 @@ const useEngineers = (): Engineer[] => {
                     setEngineers(response);
                 }
             });
+
+       return () => {
+           subscription.unsubscribe();
+       }
     },[]);
 
     return engineers;

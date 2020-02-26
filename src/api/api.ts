@@ -1,15 +1,14 @@
-import {Observable} from 'rxjs';
+import {from, Observable} from 'rxjs';
 import {AxiosPromise, AxiosResponse} from 'axios';
 import initializeAxios from './axiosSetup';
 import {axiosRequestConfiguration} from './config';
 import HTTPMethod from 'http-method-enum';
-import {fromPromise} from "rxjs/internal-compatibility";
 import {map} from "rxjs/operators";
 
 
 const axiosInstance = initializeAxios(axiosRequestConfiguration);
 
-const request = <T>(method: HTTPMethod, url: string, queryParams?: object, body?: object): Observable<T> => {
+const requestParser = <T>(method: HTTPMethod, url: string, queryParams?: object, body?: object): Observable<T> => {
     let request: AxiosPromise<T>;
     switch (method) {
         case HTTPMethod.GET:
@@ -32,27 +31,27 @@ const request = <T>(method: HTTPMethod, url: string, queryParams?: object, body?
             throw new Error('Method not supported');
     }
 
-    return fromPromise<AxiosResponse<T>>( request ).pipe(map(result => result.data));
+    return from( request ).pipe(map(result => result.data));
 };
 
 const get = <T>(url: string, queryParams?: object):Observable<T> => {
-    return request<T>(HTTPMethod.GET, url, queryParams);
+    return requestParser<T>(HTTPMethod.GET, url, queryParams);
 };
 
 const post = <T>(url: string, body: object, queryParams?: object): Observable<T | void> => {
-    return request<T>(HTTPMethod.POST, url, queryParams, body);
+    return requestParser<T>(HTTPMethod.POST, url, queryParams, body);
 };
 
 const put = <T>(url: string, body: object, queryParams?: object): Observable<T | void> => {
-    return request<T>(HTTPMethod.PUT, url, queryParams, body);
+    return requestParser<T>(HTTPMethod.PUT, url, queryParams, body);
 };
 
 const patch = <T>(url: string, body: object, queryParams?: object): Observable<T | void> => {
-    return request<T>(HTTPMethod.PATCH, url, queryParams, body);
+    return requestParser<T>(HTTPMethod.PATCH, url, queryParams, body);
 };
 
-const deleteR = <T>(url:string , queryParams?:object): Observable<T | void> => {
-    return request<T>(HTTPMethod.DELETE, url, queryParams);
+const remove = <T>(url:string , queryParams?:object): Observable<T | void> => {
+    return requestParser<T>(HTTPMethod.DELETE, url, queryParams);
 };
 
-export default  { request, get, post, put, patch, deleteR } ;
+export default  { requestParser, get, post, put, patch, remove } ;
