@@ -1,30 +1,26 @@
 {
   "engineers": [
     {
+      "id": 1,
       "name": "Linus Torvalds",
       "accomplishment": "Linux kernel"
     },
     {
+      "id": 2,
       "name": "Dennis Ritchie",
       "accomplishment": "C"
-    },
-    {
-      "name": "Brendan Eich",
-      "accomplishment": "JavaScript"
     }
   ],
   "languages": [
     {
+      "id": 1,
       "name": "C#",
       "company": "Microsoft"
     },
     {
+      "id": 2,
       "name": "Java",
       "company": "Oracle"
-    },
-    {
-      "name": "Python",
-      "company": "Python Software Foundation"
     }
   ]
 }
