@@ -3,12 +3,12 @@ import {AxiosPromise, AxiosResponse} from 'axios';
 import initializeAxios from './axiosSetup';
 import {axiosRequestConfiguration} from './config';
 import HTTPMethod from 'http-method-enum';
-import {map} from "rxjs/operators";
-
+import {map, tap} from "rxjs/operators";
+import {Response} from "./response";
 
 const axiosInstance = initializeAxios(axiosRequestConfiguration);
 
-const requestParser = <T>(method: HTTPMethod, url: string, queryParams?: object, body?: object): Observable<T> => {
+const requestParser = <T>(method: HTTPMethod, url: string, queryParams?: object, body?: object): Observable<Response<T>> => {
     let request: AxiosPromise<T>;
     switch (method) {
         case HTTPMethod.GET:
@@ -31,7 +31,13 @@ const requestParser = <T>(method: HTTPMethod, url: string, queryParams?: object,
             throw new Error('Method not supported');
     }
 
-    return from( request ).pipe(map(result => result.data));
+    return from( request ).pipe(tap(result => { }
+        //             data: result.data,
+        //             request: result.request ,
+        //             headers: result.headers ,
+        //             config:result.config
+        // }
+                    ));
 };
 
 const get = <T>(url: string, queryParams?: object):Observable<T> => {
