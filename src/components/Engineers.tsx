@@ -4,13 +4,13 @@ import {Engineer} from "../models/engineer";
 import {catchError, take} from "rxjs/operators";
 import {of} from "rxjs";
 import {CrudProps} from '../models/crudProps';
+import {Span} from "./styled/Span";
 
 
 const Engineers = (props: CrudProps) => {
     const [engineers, setEngineers] = useState<Engineer[]>([]);
     const [name, setName] = useState<string>('');
     const [accomplishment, setAccomplishment] = useState<string>('');
-    const [input, setInput] = useState<boolean>(false);
 
     const getEngineers = () => {
         api
@@ -30,7 +30,7 @@ const Engineers = (props: CrudProps) => {
 
         const changeSubscription = props
             .change?.subscribe((change) => {
-                if (change === true) getEngineers();
+                if (change) getEngineers();
             });
 
         return (() => {
@@ -53,7 +53,7 @@ const Engineers = (props: CrudProps) => {
                         { <div className="ui transparent input">
                             <input type="text" placeholder="Engineers name"
                                    onChange={event => setName(event.target.value)}/>
-                            <span>managed to create</span>
+                            <Span>managed to create</Span>
                             <input type="text" placeholder=" Engineer Accomplishment"
                                    onChange={event => setAccomplishment(event.target.value)}/>
                         </div>}

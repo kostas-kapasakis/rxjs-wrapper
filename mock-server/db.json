@@ -6,29 +6,14 @@
       "accomplishment": "Linux kernel"
     },
     {
-      "id": 2,
-      "name": "Linus Torvalds",
-      "accomplishment": "Linux kernel"
-    },
-    {
       "name": "Bill Gates",
       "accomplishment": "Microsoft",
-      "id": 5
+      "id": 2
     },
     {
-      "name": "me",
-      "accomplishment": "nothing",
-      "id": 6
-    },
-    {
-      "name": "angelika",
-      "accomplishment": "many stuff",
-      "id": 7
-    },
-    {
-      "name": "kkok",
-      "accomplishment": "kokoko",
-      "id": 8
+      "name": "Brendan Eich",
+      "accomplishment": "JavaScript",
+      "id": 3
     }
   ],
   "languages": [
@@ -39,18 +24,13 @@
     },
     {
       "id": 2,
-      "name": "C#",
-      "company": "Microsoft"
+      "name": "Java",
+      "company": "Oracle"
     },
     {
       "id": 3,
-      "name": "C#",
-      "company": "Microsoft"
-    },
-    {
-      "id": 4,
-      "name": "C#",
-      "company": "Microsoft"
+      "name": "Golang",
+      "company": "Google"
     }
   ]
 }

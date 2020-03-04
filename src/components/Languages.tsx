@@ -4,6 +4,7 @@ import api from "../api/api";
 import {catchError, take} from "rxjs/operators";
 import {of} from "rxjs";
 import {CrudProps} from "../models/crudProps";
+import {Span} from "./styled/Span";
 
 
 const Languages = (props: CrudProps) => {
@@ -13,7 +14,7 @@ const Languages = (props: CrudProps) => {
         getLanguages();
 
         const changeSubscription = props.change?.subscribe((change) => {
-            if (change === true) getLanguages();
+            if (change) getLanguages();
         });
 
         return (() => {
@@ -30,7 +31,6 @@ const Languages = (props: CrudProps) => {
                 catchError(err => of(console.log(err)))
             )
             .subscribe(response => {
-                console.log(response);
                 if (response) {
                     setLanguages(response);
                 }
@@ -47,9 +47,9 @@ const Languages = (props: CrudProps) => {
                     </div>
                     <div className="content">
                         <div className="ui  transparent input">
-                            <input type="text" placeholder="language name"/>
-                            <span>invented from </span>
-                            <input type="text" placeholder=" company" />
+                            <input type="text" placeholder="Programming Language"/>
+                            <Span>invented from </Span>
+                            <input type="text" placeholder="Company" />
                         </div>
                     </div>
                 </div>
