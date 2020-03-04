@@ -7,8 +7,28 @@
     },
     {
       "id": 2,
-      "name": "Dennis Ritchie",
-      "accomplishment": "C"
+      "name": "Linus Torvalds",
+      "accomplishment": "Linux kernel"
+    },
+    {
+      "name": "Bill Gates",
+      "accomplishment": "Microsoft",
+      "id": 5
+    },
+    {
+      "name": "me",
+      "accomplishment": "nothing",
+      "id": 6
+    },
+    {
+      "name": "angelika",
+      "accomplishment": "many stuff",
+      "id": 7
+    },
+    {
+      "name": "kkok",
+      "accomplishment": "kokoko",
+      "id": 8
     }
   ],
   "languages": [
@@ -19,8 +39,18 @@
     },
     {
       "id": 2,
-      "name": "Java",
-      "company": "Oracle"
+      "name": "C#",
+      "company": "Microsoft"
+    },
+    {
+      "id": 3,
+      "name": "C#",
+      "company": "Microsoft"
+    },
+    {
+      "id": 4,
+      "name": "C#",
+      "company": "Microsoft"
     }
   ]
 }

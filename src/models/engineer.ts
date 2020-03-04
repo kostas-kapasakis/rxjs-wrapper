@@ -1,5 +1,5 @@
 export type Engineer = {
-    id:number;
+    id?:number;
     name: string;
     accomplishment: string;
 }

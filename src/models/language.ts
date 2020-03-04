@@ -1,5 +1,5 @@
 export type Language = {
-    id:number;
+    id?:number;
     name: string;
     company: string;
 }
