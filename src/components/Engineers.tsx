@@ -1,31 +1,25 @@
 import React, {useEffect, useState} from 'react';
-import api from "../api/api";
 import {Engineer} from "../models/engineer";
-import {catchError, take} from "rxjs/operators";
-import {of} from "rxjs";
 import {CrudProps} from '../models/crudProps';
 import {Span} from "./styled/Span";
 
 
-const Engineers = (props: CrudProps) => {
+const Engineers = (props: CrudProps<Engineer>) => {
     const [engineers, setEngineers] = useState<Engineer[]>([]);
     const [name, setName] = useState<string>('');
     const [accomplishment, setAccomplishment] = useState<string>('');
 
-    const getEngineers = () => {
-        api
-            .get<Engineer[]>("engineers")
-            .pipe(
-                take(1),
-                catchError(err => of(console.log(err)))
-            ).subscribe((response) => {
-            if (response) {
-                setEngineers(response);
-            }
-        });
+    const resetInputs = () => {
+        setName('');
+        setAccomplishment('');
     };
 
     useEffect(() => {
+        const getEngineers = () =>
+            props.get('engineers').subscribe((response => {
+            setEngineers(response);
+        }));
+
         getEngineers();
 
         const changeSubscription = props
@@ -46,16 +40,16 @@ const Engineers = (props: CrudProps) => {
                 <div className="item" key={"new-engineer"}>
                     <div className="right floated content">
                         <div className="ui primary button"
-                             onClick={() => props.add("engineers", {name, accomplishment})}>Add
+                             onClick={() => {props.add("engineers", {name, accomplishment}); resetInputs();}}>Add
                         </div>
                     </div>
                     <div className="content">
                         { <div className="ui transparent input">
-                            <input type="text" placeholder="Engineers name"
-                                   onChange={event => setName(event.target.value)}/>
+                            <input type="text"  placeholder="Engineers name" value={name}
+                                   onChange={e => setName(e.target.value)}/>
                             <Span>managed to create</Span>
-                            <input type="text" placeholder=" Engineer Accomplishment"
-                                   onChange={event => setAccomplishment(event.target.value)}/>
+                            <input type="text" placeholder=" Engineer Accomplishment" value={accomplishment}
+                                   onChange={e => setAccomplishment(e.target.value)}/>
                         </div>}
                     </div>
                 </div>

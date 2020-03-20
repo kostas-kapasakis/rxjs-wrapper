@@ -1,20 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {Language} from "../models/language";
-import api from "../api/api";
-import {catchError, take} from "rxjs/operators";
-import {of} from "rxjs";
 import {CrudProps} from "../models/crudProps";
 import {Span} from "./styled/Span";
 
 
-const Languages = (props: CrudProps) => {
+const Languages = (props: CrudProps<Language>) => {
     const [languages, setLanguages] = useState<Language[]>([]);
+    const [name, setName] = useState<string>('');
+    const [company, setCompany] = useState<string>('');
+
+    const resetInputs = () => {
+        setName('');
+        setCompany('')
+    };
 
     useEffect(() => {
+        const getLanguages = () =>
+            props.get('languages').subscribe((response => {
+                setLanguages(response);
+            }));
+
         getLanguages();
 
         const changeSubscription = props.change?.subscribe((change) => {
             if (change) getLanguages();
+
         });
 
         return (() => {
@@ -23,33 +33,21 @@ const Languages = (props: CrudProps) => {
 
     }, [props.change]);
 
-    const getLanguages = () => {
-        return api
-            .get<Language[]>("languages")
-            .pipe(
-                take(1),
-                catchError(err => of(console.log(err)))
-            )
-            .subscribe(response => {
-                if (response) {
-                    setLanguages(response);
-                }
-            });
-    };
-
     return (
         <>
             <h3>Languages</h3>
             <div className="ui middle aligned divided list">
-                <div className="item" key={"new-language"}>
+                <div className="item" key={"new-name"}>
                     <div className="right floated content">
-                        <div className="ui primary button">Add</div>
+                        <div onClick={() => { props.add("languages", {name:name,company}); resetInputs();}} className="ui primary button">Add</div>
                     </div>
                     <div className="content">
                         <div className="ui  transparent input">
-                            <input type="text" placeholder="Programming Language"/>
+                            <input type="text" value={name}
+                                   onChange={e => setName(e.target.value)} placeholder="Programming Language"/>
                             <Span>invented from </Span>
-                            <input type="text" placeholder="Company" />
+                            <input type="text"  value={company}
+                                   onChange={e=> setCompany(e.target.value)} placeholder="Company" />
                         </div>
                     </div>
                 </div>
