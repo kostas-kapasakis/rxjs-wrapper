@@ -4,7 +4,12 @@ Axios Wrapper implementation by using
 - RXJS
 - axios
 
-Extend rxios briliant solution and use axios global instance(https://github.com/davguij/rxios).
+1) To run the mock server:  
 
+json-server ./mock-server/db.json
+
+2)To run the react app: 
+
+npm run start:dev
 
 
