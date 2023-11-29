@@ -10,7 +10,7 @@
     "@types/node": "^12.12.28",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "http-method-enum": "^1.0.0",
     "http-status-codes": "^1.4.0",
     "json-server": "^0.16.1",
